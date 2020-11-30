@@ -3,29 +3,9 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function ImportantScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Important Notifications!</Text>
-    </View>
-  );
-}
-
-function UnimportantScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Unimportant Notifications!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
-    );
-  }
+import ImportantScreen from './components/ImportantScreen';
+import UnimportantScreen from './components/UnimportantScreen';
+import SettingsScreen from './components/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
