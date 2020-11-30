@@ -4,6 +4,7 @@
   "expo": {
     "name": "NotificationFlow",
     "slug": "NotificationFlow",
+    "sdkVersion": "36.0.0",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
