@@ -1,6 +1,12 @@
 {
-    "expo": {
-      "name": "My app",
-      "slug": "my-app"
-    }
+  "name": "NotificationFlow",
+  "displayName": "NotificationFlow",
+  "expo": {
+    "name": "NotificationFlow",
+    "slug": "NotificationFlow",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
   }
+}
