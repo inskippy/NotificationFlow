@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,13 +10,84 @@ import SettingsScreen from './components/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
+function displayNotification() {
+  
+  
+}
+
 export default function App() {
+  const [importantNotifs, setImportantNotifs] = useState([{
+    id: 0,
+    AppName: "Mail",
+    NotificationText: "CSC211 - Assignment 9 Due Date",
+    TimeReceived: "12:00pm"
+  },
+  {
+    id: 1,
+    AppName: "Slack",
+    NotificationText: "Prof Bai posted in CSC 211 #general",
+    TimeReceived: "4:45pm"
+  },
+  {
+    id: 2,
+    AppName: "LinkedIn",
+    NotificationText: "New jobs posted in Rochester NY",
+    TimeReceived: "7:57pm"
+  }]);
+
+  const [unimportantNotifs, setUnimportantNotifs] = useState([{
+    id: 0,
+    AppName: "Snapchat",
+    NotificationText: "Adam Inskip",
+    TimeReceived: "12:30pm"
+  },
+  {
+    id: 1,
+    AppName: "Facebook",
+    NotificationText: "Montel Yu",
+    TimeReceived: "12:45pm"
+  },
+  {
+    id: 2,
+    AppName: "Instagram",
+    NotificationText: "Alejandro Ramirez",
+    TimeReceived: "6:20pm"
+  }]);
+  
+
+  const addImportantNotifs = event => {
+    event.preventDefault();
+      setImportantNotifs([
+      ...notifs,
+      {
+        id: notifs.length,
+        AppName: "Snapchat",
+        NotificationText: "Adam Inskip",
+        TimeReceived: "11:30a"
+      }
+    ])
+  }
+
+  const addUnimportantNotifs = event => {
+    event.preventDefault();
+      setUnimportantNotifs([
+      ...notifs,
+      {
+        id: notifs.length,
+        AppName: "Snapchat",
+        NotificationText: "Adam Inskip",
+        TimeReceived: "11:30a"
+      }
+    ])
+  }
+
+
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Important" component={ImportantScreen} />
-        <Tab.Screen name="Unimportant" component={UnimportantScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Important" children={()=><ImportantScreen notifs={importantNotifs} addNotifs={addImportantNotifs}/>}/>
+        <Tab.Screen name="Unimportant" children={()=><ImportantScreen notifs={unimportantNotifs} addNotifs={addUnimportantNotifs}/>}/>
+        <Tab.Screen name="Settings" children={()=><SettingsScreen/>}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
