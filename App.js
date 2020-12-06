@@ -7,13 +7,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ImportantScreen from './components/ImportantScreen';
 import UnimportantScreen from './components/UnimportantScreen';
 import SettingsScreen from './components/SettingsScreen';
+import SendNotificationScreen from './components/SendNotificationScreen'
 
 const Tab = createBottomTabNavigator();
 
-function displayNotification() {
-  
-  
-}
 
 export default function App() {
   const [importantNotifs, setImportantNotifs] = useState([{
@@ -53,30 +50,44 @@ export default function App() {
     NotificationText: "Alejandro Ramirez",
     TimeReceived: "6:20pm"
   }]);
+
+  const notifArrays = {importantNotifs, setImportantNotifs, unimportantNotifs, setUnimportantNotifs};
   
 
-  const addImportantNotifs = event => {
-    event.preventDefault();
-      setImportantNotifs([
-      ...notifs,
-      {
-        id: notifs.length,
-        AppName: "Snapchat",
-        NotificationText: "Adam Inskip",
-        TimeReceived: "11:30a"
-      }
-    ])
-  }
+  // const addImportantNotifs = event => {
+  //   event.preventDefault();
+  //     setImportantNotifs([
+  //     ...notifs,
+  //     {
+  //       id: notifs.length,
+  //       AppName: "Snapchat",
+  //       NotificationText: "Adam Inskip",
+  //       TimeReceived: "11:30am"
+  //     }
+  //   ])
+  // }
 
-  const addUnimportantNotifs = event => {
-    event.preventDefault();
-      setUnimportantNotifs([
-      ...notifs,
+  // const addUnimportantNotifs = event => {
+  //   event.preventDefault();
+  //     setUnimportantNotifs([
+  //     ...notifs,
+  //     {
+  //       id: notifs.length,
+  //       AppName: "Snapchat",
+  //       NotificationText: "Adam Inskip",
+  //       TimeReceived: "11:30am"
+  //     }
+  //   ])
+  // }
+
+  const addNewNotification = (props) => {
+    setImportantNotifs([
+      ...importantNotifs,
       {
         id: notifs.length,
-        AppName: "Snapchat",
-        NotificationText: "Adam Inskip",
-        TimeReceived: "11:30a"
+        AppName: props.AppName,
+        NotificationText: props.NotificationText,
+        TimeReceived: props.TimeReceived
       }
     ])
   }
@@ -85,9 +96,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Important" children={()=><ImportantScreen notifs={importantNotifs} addNotifs={addImportantNotifs}/>}/>
-        <Tab.Screen name="Unimportant" children={()=><ImportantScreen notifs={unimportantNotifs} addNotifs={addUnimportantNotifs}/>}/>
+        <Tab.Screen name="Important" children={()=><ImportantScreen notifs={importantNotifs}/>}/>
+        <Tab.Screen name="Unimportant" children={()=><ImportantScreen notifs={unimportantNotifs}/>}/>
         <Tab.Screen name="Settings" children={()=><SettingsScreen/>}/>
+        {/* <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen importantNotifs={importantNotifs} importantNotifs= {importantNotifs} setImportantNotifs={setImportantNotifs} />}/> */}
+        <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen notifArrays={notifArrays} />}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
