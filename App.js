@@ -15,6 +15,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   // const [importantNotifs, setImportantNotifs] = useState([]);
   // const [unimportantNotifs, setUnimportantNotifs] = useState([]);
+  const [userAppList, setUserAppList] = useState([]);
 
   const [importantNotifs, setImportantNotifs] = useState([{
     id: 0,
@@ -100,10 +101,10 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Important" children={()=><ImportantScreen notifs={importantNotifs}/>}/>
-        <Tab.Screen name="Unimportant" children={()=><ImportantScreen notifs={unimportantNotifs}/>}/>
-        <Tab.Screen name="Settings" children={()=><SettingsScreen/>}/>
+        <Tab.Screen name="Unimportant" children={()=><UnimportantScreen notifs={unimportantNotifs}/>}/>
+        <Tab.Screen name="Settings" children={()=><SettingsScreen notifArrays={notifArrays} setUserAppList={setUserAppList}/>}/>
         {/* <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen importantNotifs={importantNotifs} importantNotifs= {importantNotifs} setImportantNotifs={setImportantNotifs} />}/> */}
-        <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen notifArrays={notifArrays} />}/>
+        <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen notifArrays={notifArrays} userAppList={userAppList} />}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

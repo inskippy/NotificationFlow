@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import Checkbox from "./Checkbox";
 import { Notification } from './Notification.js';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
+import { styles } from './styles'
 
 const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
 const now = new Date();
@@ -27,18 +28,20 @@ class App extends Component
       checkboxes: {
         ...prevState.checkboxes,
         [name]: !prevState.checkboxes[name]
-      }
+      },
     }));
   };
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-
+    let currentUserAppList = [];
     Object.keys(this.state.checkboxes)
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
+        currentUserAppList.push(checkbox);
       });
+      this.props.setUserAppList(currentUserAppList);
+      alert("Saved: " + currentUserAppList)
   };
 
   createCheckbox = option => (
@@ -46,7 +49,7 @@ class App extends Component
       label={option}
       isSelected={this.state.checkboxes[option]}
       onCheckboxChange={this.handleCheckboxChange}
-      key={option}
+      key="{option}"
     />
   );
 
@@ -56,7 +59,7 @@ class App extends Component
   {
     return (
       <View style = {styles.container}>
-  
+        <Text style={styles.title}>Settings</Text>
         <div className="row mt-5">
   
           <div className="col-sm-12">
@@ -70,7 +73,7 @@ class App extends Component
   
   
             <Text style={styles.label}>App-based Filtering</Text>
-              <form onSubmit={App.handleFormSubmit}>
+              <form onSubmit={this.handleFormSubmit}>
                 {this.createCheckboxes()}
                 <div className="form-group mt-2">
                   <button type="submit" className="btn btn-primary">
@@ -90,22 +93,5 @@ class App extends Component
       
 }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  label: {
-    //margin: 24,
-    marginLeft: 5,
-    marginBottom: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'left',
-  },
-});
 
 export default App;

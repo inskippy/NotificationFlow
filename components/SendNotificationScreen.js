@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Text, View, Alert, TextInput } from 'react-native';
+import AppFilter from './AppFilter.js'
 
 export default function SendNotificationScreen(props) {
     const [appName, setAppname] = useState("");
@@ -10,7 +11,14 @@ export default function SendNotificationScreen(props) {
         event.preventDefault();
         alert("appName: " + appName + " notifText: " + notifText + " timeRec: " + timeRec)
         // some logic here - apply filters, add to important/unimportant
-        addToImportant();
+        // addToImportant();
+        AppFilter({
+          AppName: appName,
+          NotificationText: notifText,
+          TimeReceived: timeRec,
+        },
+        props.notifArrays,
+        props.userAppList);
       }
 
       const addToImportant = () => {
