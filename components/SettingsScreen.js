@@ -1,51 +1,13 @@
 import React, { Component, useState } from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import Checkbox from "./Checkbox";
-import { Notification } from './notification.js';
+import { Notification } from './Notification.js';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
 const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
 const now = new Date();
 const nextHour = new Date();
-
-export default function SettingsScreen() {
-  const [value, onChange] = useState([now, nextHour]);
-
-  return (
-    <View style = {styles.container}>
-
-      <div className="row mt-5">
-
-        <div className="col-sm-12">
-
-          <Text style={styles.label}>Time-based Filtering</Text>
-          <TimeRangePicker
-          onChange={onChange}
-          />
-
-          <br /> <br /> <br />
-
-
-          <Text style={styles.label}>App-based Filtering</Text>
-            <form onSubmit={App.handleFormSubmit}>
-              {App.createCheckboxes()}
-              <div className="form-group mt-2">
-                <button type="submit" className="btn btn-primary">
-                  Save
-                </button>
-
-            </div>
-            
-          </form>
-
-        </div>
-
-      </div>
-
-    </View>
-  );
-}
-
+//const [value, onChange] = useState([now, nextHour]);
 class App extends Component 
 {
   state = {
@@ -89,7 +51,44 @@ class App extends Component
   );
 
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
-    
+
+  render()
+  {
+    return (
+      <View style = {styles.container}>
+  
+        <div className="row mt-5">
+  
+          <div className="col-sm-12">
+  
+            <Text style={styles.label}>Time-based Filtering</Text>
+            {/* <TimeRangePicker
+            onChange={onChange}
+            /> */}
+  
+            <br /> <br /> <br />
+  
+  
+            <Text style={styles.label}>App-based Filtering</Text>
+              <form onSubmit={App.handleFormSubmit}>
+                {this.createCheckboxes()}
+                <div className="form-group mt-2">
+                  <button type="submit" className="btn btn-primary">
+                    Save
+                  </button>
+  
+              </div>
+              
+            </form>
+  
+          </div>
+  
+        </div>
+  
+      </View>
+    );
+      
+}
 }
 
 const styles = StyleSheet.create({
@@ -108,3 +107,5 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
+
+export default App;
