@@ -13,6 +13,9 @@ const Tab = createBottomTabNavigator();
 
 
 export default function App() {
+  // const [importantNotifs, setImportantNotifs] = useState([]);
+  // const [unimportantNotifs, setUnimportantNotifs] = useState([]);
+
   const [importantNotifs, setImportantNotifs] = useState([{
     id: 0,
     AppName: "Mail",
