@@ -17,6 +17,7 @@ export default function AppFilter(notification, notifArrays, userAppList) {
         ]);
     } else {
         // did not pass App filter, must be unimportant
+        alert("adding " + notification.AppName);
         notifArrays.setUnimportantNotifs([
             ...notifArrays.unimportantNotifs,
             {

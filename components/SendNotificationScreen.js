@@ -1,6 +1,49 @@
 import React, { useState } from 'react';
 import { Button, Text, View, Alert, TextInput } from 'react-native';
 import AppFilter from './AppFilter.js'
+import { styles } from './styles.js';
+
+
+
+
+let notificationSet01 = [{
+  id: 0,
+  AppName: "Mail",
+  NotificationText: "CSC211 - Assignment 9 Due Date",
+  TimeReceived: "12:00pm"
+},
+{
+  id: 1,
+  AppName: "Slack",
+  NotificationText: "Prof Bai posted in CSC 211 #general",
+  TimeReceived: "4:45pm"
+},
+{
+  id: 2,
+  AppName: "LinkedIn",
+  NotificationText: "New jobs posted in Rochester NY",
+  TimeReceived: "7:57pm"
+},
+{
+  id: 3,
+  AppName: "Snapchat",
+  NotificationText: "Adam Inskip",
+  TimeReceived: "12:30pm"
+},
+{
+  id: 4,
+  AppName: "Facebook",
+  NotificationText: "Montel Yu",
+  TimeReceived: "12:45pm"
+},
+{
+  id: 5,
+  AppName: "Instagram",
+  NotificationText: "Alejandro Ramirez",
+  TimeReceived: "6:20pm"
+},
+]
+
 
 export default function SendNotificationScreen(props) {
     const [appName, setAppname] = useState("");
@@ -21,36 +64,49 @@ export default function SendNotificationScreen(props) {
         props.userAppList);
       }
 
-      const addToImportant = () => {
-        props.notifArrays.setImportantNotifs([
-            ...props.notifArrays.importantNotifs,
-            {
-              id: props.notifArrays.importantNotifs.length,
-              AppName: appName,
-              NotificationText: notifText,
-              TimeReceived: timeRec
-            }
-          ])
-      }
+    const addToImportant = () => {
+      props.notifArrays.setImportantNotifs([
+          ...props.notifArrays.importantNotifs,
+          {
+            id: props.notifArrays.importantNotifs.length,
+            AppName: appName,
+            NotificationText: notifText,
+            TimeReceived: timeRec
+          }
+        ])
+    }
 
-      const addToUnimportant = () => {
-        props.notifArrays.setUnimportantNotifs([
-            ...props.notifArrays.unimportantNotifs,
-            {
-              id: props.notifArrays.unimportantNotifs.length,
-              AppName: appName,
-              NotificationText: notifText,
-              TimeReceived: timeRec
-            }
-          ])
+    const addToUnimportant = () => {
+      props.notifArrays.setUnimportantNotifs([
+          ...props.notifArrays.unimportantNotifs,
+          {
+            id: props.notifArrays.unimportantNotifs.length,
+            AppName: appName,
+            NotificationText: notifText,
+            TimeReceived: timeRec
+          }
+        ])
+    }
+
+    const sendNotificationSet = () => {
+      for (const notif of notificationSet01) {
+        AppFilter({
+          AppName: notif.AppName,
+          NotificationText: notif.NotificationText,
+          TimeReceived: notif.TimeReceived,
+        },
+        props.notifArrays,
+        props.userAppList);
       }
+    }
 
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.container}>
         <TextInput placeholder="AppName" onChangeText={appName => setAppname(appName)} />
         <TextInput placeholder="NotificationText" onChangeText={notifText => setNotifText(notifText)} />
         <TextInput placeholder="TimeReceived" onChangeText={timeRec => setTimeRec(timeRec)} />
         <Button title="Send notification" onPress={submit} />
+        <Button title="Notification Set 01" onPress={sendNotificationSet} />
       </View>
     );
 }
