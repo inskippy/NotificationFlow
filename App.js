@@ -15,44 +15,11 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   // const [importantNotifs, setImportantNotifs] = useState([]);
   // const [unimportantNotifs, setUnimportantNotifs] = useState([]);
+  const [userAppList, setUserAppList] = useState([]);
 
-  const [importantNotifs, setImportantNotifs] = useState([{
-    id: 0,
-    AppName: "Mail",
-    NotificationText: "CSC211 - Assignment 9 Due Date",
-    TimeReceived: "12:00pm"
-  },
-  {
-    id: 1,
-    AppName: "Slack",
-    NotificationText: "Prof Bai posted in CSC 211 #general",
-    TimeReceived: "4:45pm"
-  },
-  {
-    id: 2,
-    AppName: "LinkedIn",
-    NotificationText: "New jobs posted in Rochester NY",
-    TimeReceived: "7:57pm"
-  }]);
+  const [importantNotifs, setImportantNotifs] = useState([]);
 
-  const [unimportantNotifs, setUnimportantNotifs] = useState([{
-    id: 0,
-    AppName: "Snapchat",
-    NotificationText: "Adam Inskip",
-    TimeReceived: "12:30pm"
-  },
-  {
-    id: 1,
-    AppName: "Facebook",
-    NotificationText: "Montel Yu",
-    TimeReceived: "12:45pm"
-  },
-  {
-    id: 2,
-    AppName: "Instagram",
-    NotificationText: "Alejandro Ramirez",
-    TimeReceived: "6:20pm"
-  }]);
+  const [unimportantNotifs, setUnimportantNotifs] = useState([]);
 
   const notifArrays = {importantNotifs, setImportantNotifs, unimportantNotifs, setUnimportantNotifs};
   
@@ -95,15 +62,46 @@ export default function App() {
     ])
   }
 
+  // const AppFilter = (notification) => {
+  //   if(userAppList.includes(notification.AppName)) {
+  //       // passes filter, run the notification through the Time Filter
+  //       // TimeFilter(props.notification)
+
+  //       // OR FOR TESTING
+  //       notifArrays.setImportantNotifs([
+  //           ...notifArrays.importantNotifs,
+  //           {
+  //               id: notifArrays.importantNotifs.length,
+  //               AppName: notification.AppName,
+  //               NotificationText: notification.NotificationText,
+  //               TimeReceived: notification.TimeReceived,
+  //           }
+  //       ]);
+  //   } else {
+  //       // did not pass App filter, must be unimportant
+  //       alert("adding " + notification.AppName);
+  //       alert(notifArrays.unimportantNotifs.length)
+  //       notifArrays.setUnimportantNotifs([
+  //           ...notifArrays.unimportantNotifs,
+  //           {
+  //               id: notifArrays.unimportantNotifs.length,
+  //               AppName: notification.AppName,
+  //               NotificationText: notification.NotificationText,
+  //               TimeReceived: notification.TimeReceived,
+  //           }
+  //       ]);
+        
+  //   }
+  // }
 
   return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Important" children={()=><ImportantScreen notifs={importantNotifs}/>}/>
-        <Tab.Screen name="Unimportant" children={()=><ImportantScreen notifs={unimportantNotifs}/>}/>
-        <Tab.Screen name="Settings" children={()=><SettingsScreen/>}/>
+        <Tab.Screen name="Unimportant" children={()=><UnimportantScreen notifs={unimportantNotifs}/>}/>
+        <Tab.Screen name="Settings" children={()=><SettingsScreen notifArrays={notifArrays} setUserAppList={setUserAppList}/>}/>
         {/* <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen importantNotifs={importantNotifs} importantNotifs= {importantNotifs} setImportantNotifs={setImportantNotifs} />}/> */}
-        <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen notifArrays={notifArrays} />}/>
+        <Tab.Screen name="Send Notifications" children={()=><SendNotificationScreen notifArrays={notifArrays} userAppList={userAppList} />}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

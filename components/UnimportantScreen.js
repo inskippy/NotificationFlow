@@ -1,10 +1,17 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, FlatList, StyleSheet, Button } from 'react-native';
+import Notification from './Notification';
+import { styles } from './styles'
 
-export default function UnimportantScreen() {
+
+export default function ImportantScreen(props) {
+   
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Unimportant Notifications!</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Unimportant Notifications</Text>
+        <FlatList data={props.notifs} renderItem={({item}) => 
+            <Notification AppName={item.AppName} NotificationText={item.NotificationText} TimeReceived={item.TimeReceived} />
+            }/>
       </View>
     );
 }
