@@ -55,13 +55,34 @@ export default function SendNotificationScreen(props) {
         alert("appName: " + appName + " notifText: " + notifText + " timeRec: " + timeRec)
         // some logic here - apply filters, add to important/unimportant
         // addToImportant();
-        AppFilter({
-          AppName: appName,
-          NotificationText: notifText,
-          TimeReceived: timeRec,
-        },
-        props.notifArrays,
-        props.userAppList);
+        if( AppFilter({
+            AppName: appName,
+            NotificationText: notifText,
+            TimeReceived: timeRec,
+            },
+            props.userAppList)) {
+              // passed filters --> important notification
+              notifArrays.setImportantNotifs([
+                ...props.notifArrays.importantNotifs,
+                {
+                    id: props.notifArrays.importantNotifs.length,
+                    AppName: appName,
+                    NotificationText: notifText,
+                    TimeReceived: timeRec,
+                }
+            ]);
+            } else {
+              // unimportant notification
+              props.notifArrays.setUnimportantNotifs([
+                ...props.notifArrays.unimportantNotifs,
+                {
+                    id: props.notifArrays.unimportantNotifs.length,
+                    AppName: appName,
+                    NotificationText: notifText,
+                    TimeReceived: timeRec,
+                }
+            ]);
+            }
       }
 
     const addToImportant = () => {
@@ -89,15 +110,40 @@ export default function SendNotificationScreen(props) {
     }
 
     const sendNotificationSet = () => {
+      let imp = props.notifArrays.importantNotifs;
+      let impID = props.notifArrays.importantNotifs.length;
+      let unimp = props.notifArrays.unimportantNotifs;
+      let unimpID = props.notifArrays.unimportantNotifs.length;
+      
       for (const notif of notificationSet01) {
-        AppFilter({
+        if(AppFilter({
           AppName: notif.AppName,
           NotificationText: notif.NotificationText,
           TimeReceived: notif.TimeReceived,
         },
-        props.notifArrays,
-        props.userAppList);
+        props.userAppList)) {
+          // passed filter, add to important
+          imp.push({
+            id: impID,
+            AppName: notif.AppName,
+            NotificationText: notif.NotificationText,
+            TimeReceived: notif.TimeReceived,
+          });
+          impID = impID + 1;
+        } else {
+          // failed filter, add to unimportant
+          unimp.push({
+            id: unimpID,
+            AppName: notif.AppName,
+            NotificationText: notif.NotificationText,
+            TimeReceived: notif.TimeReceived,
+          });
+          unimpID = unimpID + 1;
+        }
       }
+      // add filtered notifications to master lists
+      props.notifArrays.setImportantNotifs(imp);
+      props.notifArrays.setUnimportantNotifs(unimp);
     }
 
     return (
