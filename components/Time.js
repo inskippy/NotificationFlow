@@ -97,7 +97,7 @@ class App extends Component
 
 function TimeFilter(Notification)
 {
-  var time = notification.timeRecieved;
+  var time = notification.timeReceived;
     
   if(!(time > userTimeList.lower && time < userTimeList.upper))
   {

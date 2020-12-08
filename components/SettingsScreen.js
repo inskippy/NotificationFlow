@@ -2,23 +2,15 @@ import React, { Component, useState } from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import Checkbox from "./Checkbox";
 import { Notification } from './Notification.js';
-import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import { styles } from './styles'
-import TimeRange from 'react-time-range';
 import TimeRangeSelect from "react-time-range-select";
 
 const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
-class App extends Component 
-{
-  // constructor(props) 
-  // {
-  //   super(props);
-  //   this.state = {
-  //     startTime: "2019-10-05T01:48:00.000Z",
-  //     endTime: "2019-10-05T03:48:00.000Z"
-  //   };
-  // }
 
+export var startDate, startHour, startMin;
+export var endDate, endHour, endMin;
+export class App extends Component 
+{
   state = {
     checkboxes: OPTIONS.reduce(
       (options, option) => ({
@@ -67,10 +59,25 @@ class App extends Component
   
   changeStartTime = value => {
     this.setState({ startTime: value });
+    
+     startDate = new Date(value);
+     startHour = startDate.getHours();
+     startMin = startDate.getMinutes();
+    console.log("startDate: " + startDate);  
+    console.log("startHours " + startHour);  
+    console.log("startMins: " + startMin);
   };
 
   changeEndTime = value => {
     this.setState({ endTime: value });
+
+     endDate = new Date(value);
+     endHour = endDate.getHours();
+     endMin = endDate.getMinutes();
+    console.log("endDate: " + endDate);  
+    console.log("endHours " + endHour);  
+    console.log("endMins: " + endMin);  
+
   };
 
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
@@ -106,7 +113,6 @@ class App extends Component
   
             <br /> <br /> <br />
   
-  
             <Text style={styles.label}>App-based Filtering</Text>
               <form onSubmit={this.handleFormSubmit}>
                 {this.createCheckboxes()}
@@ -127,5 +133,10 @@ class App extends Component
     );    
   }
 }
+
+// export { startHours };
+// export { startMins };
+// export { endHours };
+// export { endMins };
 
 export default App;

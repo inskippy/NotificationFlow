@@ -7,7 +7,9 @@ const Notification = (props) => {
         <View style={styles.notification}>
             <Text style={styles.AppName}>{props.AppName}</Text>
             <Text style={styles.NotificationText}>{props.NotificationText}</Text>
-            <Text style={styles.TimeReceived}>{props.TimeReceived}</Text>
+            <Text style={styles.TimeReceived}>{props.TimeReceivedHr + ":" + props.TimeReceivedMin}</Text>
+            {/* <Text style={styles.TimeReceivedMin}>{props.TimeReceivedMin}</Text> */}
+
         </View>
     )
 }
