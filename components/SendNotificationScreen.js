@@ -77,7 +77,7 @@ export default function SendNotificationScreen(props) {
               TimeReceivedMin: timeRecMin,
               },
               props.userAppList) &&
-              TimeFilter({
+              !TimeFilter({
                 AppName: appName,
                 NotificationText: notifText,
                 TimeReceivedHr: timeRecHr,
@@ -85,7 +85,7 @@ export default function SendNotificationScreen(props) {
                 },
                 startHour, startMin, endHour, endMin)) {
                 // passed filters --> important notification
-                notifArrays.setImportantNotifs([
+                props.notifArrays.setImportantNotifs([
                   ...props.notifArrays.importantNotifs,
                   {
                       id: props.notifArrays.importantNotifs.length,
@@ -154,7 +154,7 @@ export default function SendNotificationScreen(props) {
           TimeReceivedMin: notif.TimeReceivedMin
         },
         props.userAppList) &&
-        TimeFilter({
+        !TimeFilter({
           AppName: appName,
           NotificationText: notifText,
           //TimeReceived: timeRec,
