@@ -1,55 +1,81 @@
 import React, { useState } from 'react';
 import { Button, Text, View, Alert, TextInput } from 'react-native';
+import { images } from '../Assets/imageImport.js';
 import AppFilter from './AppFilter.js'
 import { styles } from './styles.js';
 
 
 
-
-let notificationSet01 = [{
-  id: 0,
-  AppName: "Mail",
-  NotificationText: "CSC211 - Assignment 9 Due Date",
-  TimeReceived: "12:00pm"
-},
-{
-  id: 1,
-  AppName: "Slack",
-  NotificationText: "Prof Bai posted in CSC 211 #general",
-  TimeReceived: "4:45pm"
-},
-{
-  id: 2,
-  AppName: "LinkedIn",
-  NotificationText: "New jobs posted in Rochester NY",
-  TimeReceived: "7:57pm"
-},
-{
-  id: 3,
-  AppName: "Snapchat",
-  NotificationText: "Adam Inskip",
-  TimeReceived: "12:30pm"
-},
-{
-  id: 4,
-  AppName: "Facebook",
-  NotificationText: "Montel Yu",
-  TimeReceived: "12:45pm"
-},
-{
-  id: 5,
-  AppName: "Instagram",
-  NotificationText: "Alejandro Ramirez",
-  TimeReceived: "6:20pm"
-},
-]
-
-
 export default function SendNotificationScreen(props) {
+  let notificationSet01 = [{
+    id: 0,
+    AppImage: images.gmail,
+    AppName: "Gmail",
+    NotificationText: "CSC211 - Assignment 9 Due Date",
+    TimeReceived: "12:00pm"
+  },
+  {
+    id: 1,
+    AppImage: images.slack,
+    AppName: "Slack",
+    NotificationText: "Prof Bai posted in CSC 211 #general",
+    TimeReceived: "4:45pm"
+  },
+  {
+    id: 2,
+    AppImage: images.linkedin,
+    AppName: "LinkedIn",
+    NotificationText: "New jobs posted in Rochester NY",
+    TimeReceived: "7:57pm"
+  },
+  {
+    id: 3,
+    AppImage: images.snapchat,
+    AppName: "Snapchat",
+    NotificationText: "Adam Inskip",
+    TimeReceived: "12:30pm"
+  },
+  {
+    id: 4,
+    AppImage: images.facebook,
+    AppName: "Facebook",
+    NotificationText: "Montel Yu",
+    TimeReceived: "12:45pm"
+  },
+  {
+    id: 5,
+    AppImage: images.instagram,
+    AppName: "Instagram",
+    NotificationText: "Alejandro Ramirez",
+    TimeReceived: "6:20pm"
+  },
+  {
+    id: 6,
+    AppImage: images.messenger,
+    AppName: "Messenger",
+    NotificationText: "John Doe",
+    TimeReceived: "1:20am"
+  },
+  {
+    id: 7,
+    AppImage: images.teams,
+    AppName: "Teams",
+    NotificationText: "New post in ME 204 in #general",
+    TimeReceived: "12:30pm"
+  },
+  {
+    id: 8,
+    AppImage: images.twitter,
+    AppName: "Twitter",
+    NotificationText: "@Google liked your tweet",
+    TimeReceived: "9:43pm"
+  },
+  ]
+
     const [appName, setAppname] = useState("");
     const [notifText, setNotifText] = useState("");
     const [timeRec, setTimeRec] = useState("");
-    
+
     const submit = event => {
         event.preventDefault();
         alert("appName: " + appName + " notifText: " + notifText + " timeRec: " + timeRec)
@@ -85,29 +111,29 @@ export default function SendNotificationScreen(props) {
             }
       }
 
-    const addToImportant = () => {
-      props.notifArrays.setImportantNotifs([
-          ...props.notifArrays.importantNotifs,
-          {
-            id: props.notifArrays.importantNotifs.length,
-            AppName: appName,
-            NotificationText: notifText,
-            TimeReceived: timeRec
-          }
-        ])
-    }
+    // const addToImportant = () => {
+    //   props.notifArrays.setImportantNotifs([
+    //       ...props.notifArrays.importantNotifs,
+    //       {
+    //         id: props.notifArrays.importantNotifs.length,
+    //         AppName: appName,
+    //         NotificationText: notifText,
+    //         TimeReceived: timeRec
+    //       }
+    //     ])
+    // }
 
-    const addToUnimportant = () => {
-      props.notifArrays.setUnimportantNotifs([
-          ...props.notifArrays.unimportantNotifs,
-          {
-            id: props.notifArrays.unimportantNotifs.length,
-            AppName: appName,
-            NotificationText: notifText,
-            TimeReceived: timeRec
-          }
-        ])
-    }
+    // const addToUnimportant = () => {
+    //   props.notifArrays.setUnimportantNotifs([
+    //       ...props.notifArrays.unimportantNotifs,
+    //       {
+    //         id: props.notifArrays.unimportantNotifs.length,
+    //         AppName: appName,
+    //         NotificationText: notifText,
+    //         TimeReceived: timeRec
+    //       }
+    //     ])
+    // }
 
     const sendNotificationSet = () => {
       let imp = props.notifArrays.importantNotifs;
@@ -117,6 +143,7 @@ export default function SendNotificationScreen(props) {
       
       for (const notif of notificationSet01) {
         if(AppFilter({
+          AppImage: notif.AppImage,
           AppName: notif.AppName,
           NotificationText: notif.NotificationText,
           TimeReceived: notif.TimeReceived,
@@ -125,6 +152,7 @@ export default function SendNotificationScreen(props) {
           // passed filter, add to important
           imp.push({
             id: impID,
+            AppImage: notif.AppImage,
             AppName: notif.AppName,
             NotificationText: notif.NotificationText,
             TimeReceived: notif.TimeReceived,
@@ -134,6 +162,7 @@ export default function SendNotificationScreen(props) {
           // failed filter, add to unimportant
           unimp.push({
             id: unimpID,
+            AppImage: notif.AppImage,
             AppName: notif.AppName,
             NotificationText: notif.NotificationText,
             TimeReceived: notif.TimeReceived,

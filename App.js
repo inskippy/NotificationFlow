@@ -50,17 +50,17 @@ export default function App() {
   //   ])
   // }
 
-  const addNewNotification = (props) => {
-    setImportantNotifs([
-      ...importantNotifs,
-      {
-        id: notifs.length,
-        AppName: props.AppName,
-        NotificationText: props.NotificationText,
-        TimeReceived: props.TimeReceived
-      }
-    ])
-  }
+  // const addNewNotification = (props) => {
+  //   setImportantNotifs([
+  //     ...importantNotifs,
+  //     {
+  //       id: notifs.length,
+  //       AppName: props.AppName,
+  //       NotificationText: props.NotificationText,
+  //       TimeReceived: props.TimeReceived
+  //     }
+  //   ])
+  // }
 
   // const AppFilter = (notification) => {
   //   if(userAppList.includes(notification.AppName)) {
