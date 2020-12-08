@@ -33,10 +33,14 @@ export const styles = StyleSheet.create({
       },
       label: {
         //margin: 24,
-        marginLeft: 5,
+        //marginLeft: 5,
         marginBottom: 10,
         fontSize: 18,
         fontWeight: 'bold',
+        textAlign: 'left',
+      },
+      description: {
+        fontSize: 16,
         textAlign: 'left',
       } 
   });

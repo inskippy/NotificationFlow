@@ -87,6 +87,7 @@ export class App extends Component
     return (
       <View style = {styles.container}>
         <Text style={styles.title}>Settings</Text>
+        <br /><br /><br />
         <div className="row mt-5">
   
           <div className="col-sm-12">
@@ -102,6 +103,8 @@ export class App extends Component
               startMoment='T18:00:00'
 	            endMoment='T22:00:00'
             /> */}
+            <br />
+            <Text style={styles.description}>When do you want to block unimportant notifications?</Text>
 
             <TimeRangeSelect
               startTime={this.state.startTime}
@@ -114,6 +117,9 @@ export class App extends Component
             <br /> <br /> <br />
   
             <Text style={styles.label}>App-based Filtering</Text>
+            <br />
+            <Text style={styles.description}>Which apps are important?</Text>
+
               <form onSubmit={this.handleFormSubmit}>
                 {this.createCheckboxes()}
                 <div className="form-group mt-2">
