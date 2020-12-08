@@ -2,13 +2,14 @@ import React, { Component, useState } from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import Checkbox from "./Checkbox";
 import { Notification } from './Notification.js';
-import { styles } from './styles'
+import { styles } from './styles';
 import TimeRangeSelect from "react-time-range-select";
 
 const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
 
 export var startDate, startHour, startMin;
 export var endDate, endHour, endMin;
+export var isDebug = false;
 export class App extends Component 
 {
   state = {
@@ -60,24 +61,31 @@ export class App extends Component
   changeStartTime = value => {
     this.setState({ startTime: value });
     
-     startDate = new Date(value);
-     startHour = startDate.getHours();
-     startMin = startDate.getMinutes();
-    console.log("startDate: " + startDate);  
-    console.log("startHours " + startHour);  
-    console.log("startMins: " + startMin);
+    startDate = new Date(value);
+    startHour = startDate.getHours();
+    startMin = startDate.getMinutes();
+
+    if(isDebug)
+    {
+      console.log("startDate: " + startDate);  
+      console.log("startHours " + startHour);  
+      console.log("startMins: " + startMin);
+    }  
   };
 
   changeEndTime = value => {
     this.setState({ endTime: value });
 
-     endDate = new Date(value);
-     endHour = endDate.getHours();
-     endMin = endDate.getMinutes();
-    console.log("endDate: " + endDate);  
-    console.log("endHours " + endHour);  
-    console.log("endMins: " + endMin);  
+    endDate = new Date(value);
+    endHour = endDate.getHours();
+    endMin = endDate.getMinutes();
 
+    if(isDebug)
+    {
+      console.log("endDate: " + endDate);  
+      console.log("endHours " + endHour);  
+      console.log("endMins: " + endMin);  
+    }
   };
 
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
@@ -94,15 +102,6 @@ export class App extends Component
   
             <Text style={styles.label}>Time-based Filtering</Text>
 
-            {/* <TimeRangePicker
-              onChange={onChange}
-            /> */}
-
-            {/* <TimeRange
-              use24Hours = {true}
-              startMoment='T18:00:00'
-	            endMoment='T22:00:00'
-            /> */}
             <br />
             <Text style={styles.description}>When do you want to block unimportant notifications?</Text>
 
@@ -139,10 +138,5 @@ export class App extends Component
     );    
   }
 }
-
-// export { startHours };
-// export { startMins };
-// export { endHours };
-// export { endMins };
 
 export default App;
