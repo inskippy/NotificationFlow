@@ -4,13 +4,21 @@ import Checkbox from "./Checkbox";
 import { Notification } from './Notification.js';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import { styles } from './styles'
+import TimeRange from 'react-time-range';
+import TimeRangeSelect from "react-time-range-select";
 
 const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
-const now = new Date();
-const nextHour = new Date();
-//const [value, onChange] = useState([now, nextHour]);
 class App extends Component 
 {
+  // constructor(props) 
+  // {
+  //   super(props);
+  //   this.state = {
+  //     startTime: "2019-10-05T01:48:00.000Z",
+  //     endTime: "2019-10-05T03:48:00.000Z"
+  //   };
+  // }
+
   state = {
     checkboxes: OPTIONS.reduce(
       (options, option) => ({
@@ -18,7 +26,11 @@ class App extends Component
         [option]: false
       }),
       {}
-    )
+    ),
+
+    startTime: "2019-10-05T01:48:00.000Z",
+    endTime: "2019-10-05T03:48:00.000Z"
+
   };
 
   handleCheckboxChange = changeEvent => {
@@ -52,6 +64,14 @@ class App extends Component
       key="{option}"
     />
   );
+  
+  changeStartTime = value => {
+    this.setState({ startTime: value });
+  };
+
+  changeEndTime = value => {
+    this.setState({ endTime: value });
+  };
 
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
@@ -65,9 +85,24 @@ class App extends Component
           <div className="col-sm-12">
   
             <Text style={styles.label}>Time-based Filtering</Text>
+
             {/* <TimeRangePicker
-            onChange={onChange}
+              onChange={onChange}
             /> */}
+
+            {/* <TimeRange
+              use24Hours = {true}
+              startMoment='T18:00:00'
+	            endMoment='T22:00:00'
+            /> */}
+
+            <TimeRangeSelect
+              startTime={this.state.startTime}
+              endTime={this.state.endTime}
+              mode24Hours
+              onChangeStart={this.changeStartTime}
+              onChangeEnd={this.changeEndTime}
+            />
   
             <br /> <br /> <br />
   
@@ -89,9 +124,8 @@ class App extends Component
         </div>
   
       </View>
-    );
-      
-}
+    );    
+  }
 }
 
 export default App;
