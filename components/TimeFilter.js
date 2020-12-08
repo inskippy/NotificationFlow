@@ -12,17 +12,17 @@ export default function TimeFilter(notification, startHour, startMin, endHour, e
         console.log("If " + notification.TimeReceivedHr + " > " + startHour + " && " + notification.TimeReceivedHr + " < " + endHour);
     }
     
-    if(notification.TimeReceivedHr > startHour && notification.TimeReceivedHr < endHour)
+    if(notification.TimeReceivedHr > startHour && notification.TimeReceivedHr < endHour) //hour test
     {
-        //if(startMin > notification.TimeReceivedMin && endMin < notification.TimeReceivedMin)
-        //{
+        if(notification.TimeReceivedMin > startMin && notification.TimeReceivedMin < endMin) //min test
+        {
             // passed Time filter
             if(isDebug)
             {
                 console.log("true");
             }
             return true;
-        //}
+        }
         
     } 
     else 
