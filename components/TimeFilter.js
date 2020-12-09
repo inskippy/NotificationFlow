@@ -14,15 +14,15 @@ export default function TimeFilter(notification, startHour, startMin, endHour, e
     
     if(notification.TimeReceivedHr > startHour && notification.TimeReceivedHr < endHour) //hour test
     {
-        if(notification.TimeReceivedMin > startMin && notification.TimeReceivedMin < endMin) //min test
-        {
+        //if(notification.TimeReceivedMin > startMin && notification.TimeReceivedMin < endMin) //min test
+        //{
             // passed Time filter
             if(isDebug)
             {
                 console.log("true");
             }
             return true;
-        }
+        //}
         
     } 
     else 
