@@ -5,7 +5,7 @@ import { Notification } from './Notification.js';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import { styles } from './styles'
 
-const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
+const OPTIONS = ["Gmail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
 const now = new Date();
 const nextHour = new Date();
 //const [value, onChange] = useState([now, nextHour]);
