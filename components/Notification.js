@@ -14,7 +14,7 @@ const Notification = (props) => {
             <View style={styles.notifContent}>
                 <View style={styles.notifTopBar}>
                     <Text style={styles.AppName}>{props.AppName}  </Text>
-                    <Text style={styles.TimeReceived}>{props.TimeReceived}</Text>
+                    <Text style={styles.TimeReceived}>{props.TimeReceivedHr + ":" + props.TimeReceivedMin}</Text>
                 </View>
                 <Text style={styles.NotificationText}>{props.NotificationText}</Text>
             </View>

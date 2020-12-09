@@ -10,7 +10,7 @@ export default function UnimportantScreen(props) {
       <View style={styles.container}>
         <Text style={styles.title}>Important Notifications</Text>
         <FlatList data={props.notifs} renderItem={({item}) => 
-            <Notification AppName={item.AppName} NotificationText={item.NotificationText} TimeReceived={item.TimeReceived} AppImage={item.AppImage} />
+            <Notification AppName={item.AppName} NotificationText={item.NotificationText} TimeReceivedHr={item.TimeReceivedHr} TimeReceivedMin={item.TimeReceivedMin} AppImage={item.AppImage}/>
             }/>
       </View>
     );

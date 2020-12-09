@@ -53,4 +53,8 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       marginBottom: 5,
     },
+    description: {
+      fontSize: 16,
+      textAlign: 'left',
+    }
   });
