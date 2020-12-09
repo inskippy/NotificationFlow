@@ -5,7 +5,7 @@ import { Notification } from './Notification.js';
 import { styles } from './styles';
 import TimeRangeSelect from "react-time-range-select";
 
-const OPTIONS = ["Gmail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
+const OPTIONS = ["Gmail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram", "Messenger", "Teams", "Twitter"];
 
 export var startDate, startHour, startMin;
 export var endDate, endHour, endMin;
