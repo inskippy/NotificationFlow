@@ -4,7 +4,6 @@ import { isDebug } from './SettingsScreen.js';
 
 export default function TimeFilter(notification, startHour, startMin, endHour, endMin) 
 {
-    alert(notification.TimeReceivedHr);
     if(isDebug)
     {
         console.log("Start hour: " + startHour + " Start min: " + startMin);
