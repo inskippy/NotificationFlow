@@ -57,7 +57,9 @@ export default function App() {
         id: notifs.length,
         AppName: props.AppName,
         NotificationText: props.NotificationText,
-        TimeReceived: props.TimeReceived
+        //TimeReceived: props.TimeReceived
+        TimeReceivedHr: props.TimeReceivedHr,
+        TimeReceivedMin: props.TimeReceivedMin
       }
     ])
   }

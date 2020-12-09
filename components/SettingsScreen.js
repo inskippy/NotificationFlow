@@ -2,14 +2,15 @@ import React, { Component, useState } from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import Checkbox from "./Checkbox";
 import { Notification } from './Notification.js';
-import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
-import { styles } from './styles'
+import { styles } from './styles';
+import TimeRangeSelect from "react-time-range-select";
 
 const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
-const now = new Date();
-const nextHour = new Date();
-//const [value, onChange] = useState([now, nextHour]);
-class App extends Component 
+
+export var startDate, startHour, startMin;
+export var endDate, endHour, endMin;
+export var isDebug = false;
+export class App extends Component 
 {
   state = {
     checkboxes: OPTIONS.reduce(
@@ -18,7 +19,11 @@ class App extends Component
         [option]: false
       }),
       {}
-    )
+    ),
+
+    startTime: "2019-10-05T01:48:00.000Z",
+    endTime: "2019-10-05T03:48:00.000Z"
+
   };
 
   handleCheckboxChange = changeEvent => {
@@ -52,6 +57,36 @@ class App extends Component
       key="{option}"
     />
   );
+  
+  changeStartTime = value => {
+    this.setState({ startTime: value });
+    
+    startDate = new Date(value);
+    startHour = startDate.getHours();
+    startMin = startDate.getMinutes();
+
+    if(isDebug)
+    {
+      console.log("startDate: " + startDate);  
+      console.log("startHours " + startHour);  
+      console.log("startMins: " + startMin);
+    }  
+  };
+
+  changeEndTime = value => {
+    this.setState({ endTime: value });
+
+    endDate = new Date(value);
+    endHour = endDate.getHours();
+    endMin = endDate.getMinutes();
+
+    if(isDebug)
+    {
+      console.log("endDate: " + endDate);  
+      console.log("endHours " + endHour);  
+      console.log("endMins: " + endMin);  
+    }
+  };
 
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
@@ -60,19 +95,30 @@ class App extends Component
     return (
       <View style = {styles.container}>
         <Text style={styles.title}>Settings</Text>
+        <br /><br /><br />
         <div className="row mt-5">
   
           <div className="col-sm-12">
   
             <Text style={styles.label}>Time-based Filtering</Text>
-            {/* <TimeRangePicker
-            onChange={onChange}
-            /> */}
+
+            <br />
+            <Text style={styles.description}>When do you want to block unimportant notifications?</Text>
+
+            <TimeRangeSelect
+              startTime={this.state.startTime}
+              endTime={this.state.endTime}
+              mode24Hours
+              onChangeStart={this.changeStartTime}
+              onChangeEnd={this.changeEndTime}
+            />
   
             <br /> <br /> <br />
   
-  
             <Text style={styles.label}>App-based Filtering</Text>
+            <br />
+            <Text style={styles.description}>Which apps are important?</Text>
+
               <form onSubmit={this.handleFormSubmit}>
                 {this.createCheckboxes()}
                 <div className="form-group mt-2">
@@ -89,9 +135,8 @@ class App extends Component
         </div>
   
       </View>
-    );
-      
-}
+    );    
+  }
 }
 
 export default App;
