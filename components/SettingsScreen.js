@@ -103,7 +103,7 @@ class App extends Component
             <Text style={styles.label}>Time-based Filtering</Text>
 
             <br />
-            <Text style={styles.description}>When do you want to block unimportant notifications?</Text>
+            <Text style={styles.description}>When do you want the app filter to be active?</Text>
 
             <TimeRangeSelect
               startTime={this.state.startTime}
