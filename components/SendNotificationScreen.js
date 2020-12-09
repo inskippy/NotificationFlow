@@ -1,64 +1,99 @@
 import React, { useState } from 'react';
 import { Button, Text, View, Alert, TextInput } from 'react-native';
+import { images } from '../Assets/imageImport.js';
 import AppFilter from './AppFilter.js'
 import { styles } from './styles.js';
+
 import TimeFilter from './TimeFilter.js';
 import { startHour, startMin, endHour, endMin } from './SettingsScreen.js';
 
-let notificationSet01 = [{
-  id: 0,
-  AppName: "Mail",
-  NotificationText: "CSC211 - Assignment 9 Due Date",
-  //TimeReceived: "12:55"
-  TimeReceivedHr: 12,
-  TimeReceivedMin: 55
-},
-{
-  id: 1,
-  AppName: "Slack",
-  NotificationText: "Prof Bai posted in CSC 211 #general",
-  //TimeReceived: "16:45"
-  TimeReceivedHr: 16,
-  TimeReceivedMin: 45
-},
-{
-  id: 2,
-  AppName: "LinkedIn",
-  NotificationText: "New jobs posted in Rochester NY",
-  //TimeReceived: "19:57"
-  TimeReceivedHr: 19,
-  TimeReceivedMin: 57
-},
-{
-  id: 3,
-  AppName: "Snapchat",
-  NotificationText: "Adam Inskip",
-  //TimeReceived: "12:30"
-  TimeReceivedHr: 12,
-  TimeReceivedMin: 30
-},
-{
-  id: 4,
-  AppName: "Facebook",
-  NotificationText: "Montel Yu",
-  //TimeReceived: "12:45"
-  TimeReceivedHr: 12,
-  TimeReceivedMin: 45
-},
-{
-  id: 5,
-  AppName: "Instagram",
-  NotificationText: "Alejandro Ramirez",
-  //TimeReceived: "18:20"
-  TimeReceivedHr: 18,
-  TimeReceivedMin: 20
-},
-]
-
-
 export default function SendNotificationScreen(props) {
+  let notificationSet01 = [{
+    id: 0,
+    AppImage: images.gmail,
+    AppName: "Gmail",
+    NotificationText: "CSC211 - Assignment 9 Due Date",
+//     TimeReceived: "12:00pm"
+    TimeReceivedHr: 12,
+    TimeReceivedMin: 10,
+  },
+  {
+    id: 1,
+    AppImage: images.slack,
+    AppName: "Slack",
+    NotificationText: "Prof Bai posted in CSC 211 #general",
+//     TimeReceived: "4:45pm"
+    TimeReceivedHr: 16,
+    TimeReceivedMin: 45,
+  },
+  {
+    id: 2,
+    AppImage: images.linkedin,
+    AppName: "LinkedIn",
+    NotificationText: "New jobs posted in Rochester NY",
+//     TimeReceived: "7:57pm"
+    TimeReceivedHr: 19,
+    TimeReceivedMin: 57,
+  },
+  {
+    id: 3,
+    AppImage: images.snapchat,
+    AppName: "Snapchat",
+    NotificationText: "Adam Inskip",
+//     TimeReceived: "12:30pm"
+    TimeReceivedHr: 12,
+    TimeReceivedMin: 30,
+  },
+  {
+    id: 4,
+    AppImage: images.facebook,
+    AppName: "Facebook",
+    NotificationText: "Montel Yu",
+//     TimeReceived: "12:45pm"
+    TimeReceivedHr: 12,
+    TimeReceivedMin: 45,
+  },
+  {
+    id: 5,
+    AppImage: images.instagram,
+    AppName: "Instagram",
+    NotificationText: "Alejandro Ramirez",
+//     TimeReceived: "6:20pm"
+    TimeReceivedHr: 18,
+    TimeReceivedMin: 20,
+  },
+  {
+    id: 6,
+    AppImage: images.messenger,
+    AppName: "Messenger",
+    NotificationText: "John Doe",
+//     TimeReceived: "1:20am"
+    TimeReceivedHr: 1,
+    TimeReceivedMin: 20,
+  },
+  {
+    id: 7,
+    AppImage: images.teams,
+    AppName: "Teams",
+    NotificationText: "New post in ME 204 in #general",
+//     TimeReceived: "12:30pm"
+    TimeReceivedHr: 12,
+    TimeReceivedMin: 30,
+  },
+  {
+    id: 8,
+    AppImage: images.twitter,
+    AppName: "Twitter",
+    NotificationText: "@Google liked your tweet",
+//     TimeReceived: "9:43pm"
+    TimeReceivedHr: 21,
+    TimeReceivedMin: 43,
+  },
+  ]
+
     const [appName, setAppname] = useState("");
     const [notifText, setNotifText] = useState("");
+
     //const [timeRec, setTimeRec] = useState("");
     const [timeRecHr, setTimeRecHr] = useState(0);
     const [timeRecMin, setTimeRecMin] = useState(0);
@@ -111,6 +146,7 @@ export default function SendNotificationScreen(props) {
             }
       }
 
+
     const addToImportant = () => {
       props.notifArrays.setImportantNotifs([
           ...props.notifArrays.importantNotifs,
@@ -147,6 +183,7 @@ export default function SendNotificationScreen(props) {
       
       for (const notif of notificationSet01) {
         if(AppFilter({
+          AppImage: notif.AppImage,
           AppName: notif.AppName,
           NotificationText: notif.NotificationText,
           //TimeReceived: notif.TimeReceived,
@@ -163,6 +200,7 @@ export default function SendNotificationScreen(props) {
           // passed filter, add to important
           imp.push({
             id: impID,
+            AppImage: notif.AppImage,
             AppName: notif.AppName,
             NotificationText: notif.NotificationText,
             //TimeReceived: notif.TimeReceived,
@@ -174,6 +212,7 @@ export default function SendNotificationScreen(props) {
           // failed filter, add to unimportant
           unimp.push({
             id: unimpID,
+            AppImage: notif.AppImage,
             AppName: notif.AppName,
             NotificationText: notif.NotificationText,
             //TimeReceived: notif.TimeReceived,

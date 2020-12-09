@@ -5,12 +5,12 @@ import { Notification } from './Notification.js';
 import { styles } from './styles';
 import TimeRangeSelect from "react-time-range-select";
 
-const OPTIONS = ["Mail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
+const OPTIONS = ["Gmail", "Slack", "LinkedIn", "Snapchat", "Facebook", "Instagram"];
 
 export var startDate, startHour, startMin;
 export var endDate, endHour, endMin;
 export var isDebug = false;
-export class App extends Component 
+class App extends Component 
 {
   state = {
     checkboxes: OPTIONS.reduce(

@@ -4,13 +4,13 @@ import Notification from './Notification';
 import { styles } from './styles'
 
 
-export default function ImportantScreen(props) {
+export default function UnimportantScreen(props) {
    
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Important Notifications</Text>
         <FlatList data={props.notifs} renderItem={({item}) => 
-            <Notification AppName={item.AppName} NotificationText={item.NotificationText} TimeReceivedHr={item.TimeReceivedHr} TimeReceivedMin={item.TimeReceivedMin}/>
+            <Notification AppName={item.AppName} NotificationText={item.NotificationText} TimeReceivedHr={item.TimeReceivedHr} TimeReceivedMin={item.TimeReceivedMin} AppImage={item.AppImage}/>
             }/>
       </View>
     );

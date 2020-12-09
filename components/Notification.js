@@ -1,15 +1,23 @@
+import { useLinkProps } from '@react-navigation/native';
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { images } from '../Assets/imageImport';
 import { styles } from './styles'
 
+
 const Notification = (props) => {
+    console.log(images.gmail);
+    console.log(props.AppImage);
     return (
         <View style={styles.notification}>
-            <Text style={styles.AppName}>{props.AppName}</Text>
-            <Text style={styles.NotificationText}>{props.NotificationText}</Text>
-            <Text style={styles.TimeReceived}>{props.TimeReceivedHr + ":" + props.TimeReceivedMin}</Text>
-            {/* <Text style={styles.TimeReceivedMin}>{props.TimeReceivedMin}</Text> */}
-
+            <Image style={styles.AppImage} source={props.AppImage} />
+            <View style={styles.notifContent}>
+                <View style={styles.notifTopBar}>
+                    <Text style={styles.AppName}>{props.AppName}  </Text>
+                    <Text style={styles.TimeReceived}>{props.TimeReceivedHr + ":" + props.TimeReceivedMin}</Text>
+                </View>
+                <Text style={styles.NotificationText}>{props.NotificationText}</Text>
+            </View>
         </View>
     )
 }

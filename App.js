@@ -49,7 +49,7 @@ export default function App() {
   //     }
   //   ])
   // }
-
+  
   const addNewNotification = (props) => {
     setImportantNotifs([
       ...importantNotifs,
